@@ -125,28 +125,32 @@ class GpaAnalyzer
                     //if it is calc, then while loop will exit
 
                     cout << endl;
-                        //  << "#"
-                        //  << "     "
-                        //  << "Score"
-                        //  << "  "
-                        //  << "Grade" << endl;
-                        cout.width(5); cout << left << "#";
-                        cout.width(8); cout << left << "Score";
-                        cout.width(5); cout << left << "Grade"; 
-                        cout<<endl;
+                    //  << "#"
+                    //  << "     "
+                    //  << "Score"
+                    //  << "  "
+                    //  << "Grade" << endl;
+                    cout.width(5);
+                    cout << left << "#";
+                    cout.width(8);
+                    cout << left << "Score";
+                    cout.width(5);
+                    cout << left << "Grade";
+                    cout << endl;
 
                     for (int i = 0; i < scoresArray.size(); i++)
                     {
-                        
+
                         // Output the scores
-                        cout.width(5); cout << left << i;
-                        cout.width(8); cout << left << scoresArray[i] ;
-                        cout.width(5); cout << left << getGrade(scoresArray[i]);
-                        cout<<endl;
+                        cout.width(5);
+                        cout << left << i;
+                        cout.width(8);
+                        cout << left << scoresArray[i];
+                        cout.width(5);
+                        cout << left << getGrade(scoresArray[i]);
+                        cout << endl;
                         // Add All the scores into a sum
                         sum += scoresArray[i];
-
-
                     }
                     average = sum / scoresArray.size();
 
