@@ -137,6 +137,7 @@ class GpaAnalyzer
                     cout.width(5);
                     cout << left << "Grade";
                     cout << endl;
+                    sort( scoresArray.begin(), scoresArray.end());
 
                     for (int i = 0; i < scoresArray.size(); i++)
                     {
