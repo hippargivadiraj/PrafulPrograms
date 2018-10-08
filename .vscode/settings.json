@@ -5,6 +5,10 @@
         "iosfwd": "cpp",
         "__locale": "cpp",
         "locale": "cpp",
-        "__tuple": "cpp"
+        "__tuple": "cpp",
+        "algorithm": "cpp",
+        "iterator": "cpp",
+        "vector": "cpp",
+        "istream": "cpp"
     }
 }

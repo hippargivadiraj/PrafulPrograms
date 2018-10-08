@@ -2,20 +2,36 @@
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+//     "version": "0.2.0",
+//     "configurations": [
         
-        {
-            "name": "(lldb) Launch",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "average",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/Users/leadconsultant/Documents/PERSONAL/Praful/CPLUSPLUS",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "lldb"
-        }
+//         {
+//             "name": "(lldb) Launch",
+//             "type": "cppdbg",
+//             "request": "launch",
+//             "program": "${workspaceFolder}./vscode/inv4.exe",
+//             "args": [],
+//             "stopAtEntry": false,
+//             "cwd": "${workspaceFolder}/Users/leadconsultant/Documents/PERSONAL/Praful/CPLUSPLUS",
+//             "environment": [],
+//             "externalConsole": true,
+//             "MIMode": "lldb"
+//         }
+//     ]
+// }
+
+{
+    "version": "0.2.0",
+    "configurations":
+    [
+      {
+        "name": "Debug Tests C/C++",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "inv4",
+        "cwd": "${workspaceFolder}/Users/leadconsultant/Documents/PERSONAL/Praful/CPLUSPLUS",
+        "args": [],
+        "preLaunchTask": "build"
+      }
     ]
-}
+  }

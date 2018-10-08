@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-o", "inv4", "inv4.cpp"
+                "-o", "pig", "pig.cpp"
             ],
             "group": {
                 "kind": "build",
