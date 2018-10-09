@@ -19,4 +19,5 @@ cout <<endl << "The AVERAGE is : "<< average <<endl<<endl;
 
 return 0;
 
+
 }
