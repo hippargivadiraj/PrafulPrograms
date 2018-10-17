@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-class BattleGound
+class BattleGround
 {
 
     //ships and size description
@@ -95,5 +95,5 @@ class BattleGound
 int main()
 {
     return 0;
-    
+
 }
