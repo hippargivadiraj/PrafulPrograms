@@ -24,11 +24,20 @@
     "version": "0.2.0",
     "configurations":
     [
+      
+      { 
+        "name": "(lldb) Attach",
+        "type": "cppdbg",
+        "request": "attach",
+        "program": "/Users/leadconsultant/Documents/PERSONAL/Praful/CPLUSPLUS/battle.exe",
+        "processId": "${command:pickProcess}",
+        "MIMode": "lldb"
+      },
       {
         "name": "Debug Tests C/C++",
         "type": "cppdbg",
         "request": "launch",
-        "program": "inv4",
+        "program": "battle",
         "cwd": "${workspaceFolder}/Users/leadconsultant/Documents/PERSONAL/Praful/CPLUSPLUS",
         "args": [],
         "preLaunchTask": "build"
