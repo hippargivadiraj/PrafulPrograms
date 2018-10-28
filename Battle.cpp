@@ -157,6 +157,23 @@ class BattleGround
             //  return missIndicator;
         };
     }
+
+    bool gotHit()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            for (int c = 0; c < 10; c++)
+            {
+
+                if (grid[i][c] == hitIndicator)
+                {
+                    return true;
+                    break;
+                }
+            }
+        }
+        return false;
+    }
 };
 
 const int humanPlayer = 1;
@@ -184,7 +201,7 @@ void displayBoard(BattleGround BattleGround, int playerType)
                 cout << "1|";
                 break;
             case 2:
-                cout << "H|";
+                cout << "X|";
                 break;
             case 3:
                 cout << "M|";
@@ -265,7 +282,6 @@ int main()
         cin >> playerChoiceForColumn;
         playerChoiceForColumn = playerChoiceForColumn - 1;
 
-
         // use the player's choice to hit the computer BattleGround
         fireAtEnemyGrid(playerChoiceForRow, playerChoiceForColumn, computerBattleGround);
 
@@ -280,24 +296,54 @@ int main()
         cout << endl
              << endl;
 
+        //Allow player to continue or quit the game
+        bool didSomeoneGotHit = false;
+        //check if someone got hit
+
+        bool playerGotHit = playerBattleGround.gotHit();
+        cout << playerGotHit;
+        bool computerGotHit = computerBattleGround.gotHit();
+        cout << computerGotHit;
+        if (playerGotHit == true && computerGotHit == true)
+        {
+            cout << "GAME OVER. You and Computer both got hit. You are Even" << endl;
+            gameOver = true;
+        }
+        if (playerGotHit == true && computerGotHit == false)
+        {
+            cout << "GAME OVER. You got hit. Computer Wins" << endl;
+            gameOver = true;
+        }
+        if (playerGotHit == false && computerGotHit == true)
+        {
+            cout << "GAME OVER. Computer got hit. You Win" << endl;
+            gameOver = true;
+        }
+
         // Now display Status after the play
         cout << "Computer Played : "
              << "Row: " << computerChoiceForRow + 1 << "  and Column: " << computerChoiceForColumn + 1 << endl;
+
         cout << "My BattleGround Status at the End of Play" << endl;
         displayBoard(playerBattleGround, computerPlayer);
+
         cout << endl;
 
         cout << "You Played : "
-             << "Row: " << playerChoiceForRow +1 << "  and Column: " << playerChoiceForColumn + 1 << endl;
+             << "Row: " << playerChoiceForRow + 1 << "  and Column: " << playerChoiceForColumn + 1 << endl;
         cout << "Computer BattleGround Status at the End of Play" << endl;
         displayBoard(computerBattleGround, humanPlayer);
 
-        int playerChoiceToContinueGame = DisplayAndReciveMenuOptions();
-
-        if (playerChoiceToContinueGame == 2)
+        //Allow player to continue or quit the game if the game is not over yet
+        if (gameOver == false)
         {
-            cout << "GAME OVER. YOU CHOSE TO QUIT"<<endl;;
-            gameOver = true;
+            int playerChoiceToContinueGame = DisplayAndReciveMenuOptions();
+            if (playerChoiceToContinueGame == 2)
+            {
+                cout << "GAME ENDED. YOU CHOSE TO DISCONTINUE THE GAME" << endl;
+                ;
+                gameOver = true;
+            }
         }
     }
 
