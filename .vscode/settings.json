@@ -9,6 +9,12 @@
         "algorithm": "cpp",
         "iterator": "cpp",
         "vector": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "cstdlib": "cpp",
+        "__bit_reference": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "hash_map": "cpp",
+        "unordered_map": "cpp"
     }
 }

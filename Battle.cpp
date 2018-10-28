@@ -4,13 +4,15 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 //ships and size description
 const int carrier = 5;
 const int battleship = 4;
 const int cuiser = 3;
-const int sunMarine = 3;
+const int subMarine = 3;
 const int destroyer = 2;
 
 //Constants
@@ -20,17 +22,17 @@ const int hitIndicator = 2;
 const int missIndicator = 3;
 const int hitEarlier = 4;
 const int missedEarlier = 5;
-const int goingUpDown = 0;
-const int goingAcross = 1;
+const int goingUpDown = 1;
+const int goingAcross = 0;
 
 class BattleGround
 {
 
     //Create a grid that represents BattleGround, make private so no one sets it
 
-  private:
+  public:
     int grid[10][10];
- public:
+
     //first method - set grid to all water
     void setUpWaterGrid()
     {
@@ -41,6 +43,19 @@ class BattleGround
                 this->grid[row][col] = 0;
             };
         };
+        // for (int i = 0; i < 10; i++)
+        // {
+        //     for (int c = 0; c < 10; c++)
+        //     {
+
+        //         cout << grid[i][c];
+        //     }
+        //     cout << endl;
+        // }
+    }
+
+    void showValues()
+    {
         for (int i = 0; i < 10; i++)
         {
             for (int c = 0; c < 10; c++)
@@ -48,11 +63,10 @@ class BattleGround
 
                 cout << grid[i][c];
             }
-            cout<<endl;
+            cout << endl;
         }
     }
 
- 
     int getWhatIsThereAtGridRowColPosition(int x, int y)
     {
         int whatIsThereAtGrid;
@@ -124,6 +138,25 @@ class BattleGround
         }
         return 0;
     }
+
+    void takeAShot(int x, int y)
+    {
+        //did you hit
+        if (this->grid[x][y] == shipIndicator)
+        {
+            // cout << "Ship Hit";
+            this->grid[x][y] = hitIndicator;
+            // return hitIndicator;
+        };
+
+        //if you hit water area
+        if (this->grid[x][y] == waterArea)
+        {
+            // cout << "Water Hit";
+            this->grid[x][y] = missIndicator;
+            //  return missIndicator;
+        };
+    }
 };
 
 const int humanPlayer = 1;
@@ -151,13 +184,13 @@ void displayBoard(BattleGround BattleGround, int playerType)
                 cout << "1|";
                 break;
             case 2:
-                cout << "~|";
+                cout << "H|";
                 break;
             case 3:
-                cout << "~|";
+                cout << "M|";
                 break;
             default:
-                cout << "~|";
+                cout << "x|";
                 break;
             };
         };
@@ -165,18 +198,108 @@ void displayBoard(BattleGround BattleGround, int playerType)
     }
 }
 
+void fireAtEnemyGrid(int x, int y, BattleGround &bGround)
+{
+    bGround.takeAShot(x, y);
+}
+
+int RandomNumberGenerator(int x)
+{
+    // Function to output a Random Number
+    int generatedNum;
+    //Specification C1--Time Seed
+    srand(time(0));
+    generatedNum = (rand() % x);
+    return generatedNum;
+}
+
+int DisplayAndReciveMenuOptions()
+{
+    //This Funtion display's the menu option, and validates inputs.
+    int choice;
+    cout << "Do You want to Continue ( 1:To Continue, 2:To End game) " << endl;
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    while (choice < 1 || choice > 2)
+    {
+        cout << "You are expected to choose ONLY choice 1 and 2 " << endl;
+        cout << "Try once again" << endl;
+        cin >> choice;
+    }
+    return choice;
+}
+
 int main()
 
 {
     //create Battlegrounds
-    // BattleGround playerBattleGround;
-    BattleGround computerBattleGround;
-    computerBattleGround.setUpWaterGrid();
-    // playerBattleGround.addShipsToGrid(carrier,4,4,goingUpDown);
-    // displayBoard(playerBattleGround, humanPlayer);
+    BattleGround playerBattleGround;
+    playerBattleGround.setUpWaterGrid();
+    playerBattleGround.addShipsToGrid(carrier, 4, 4, goingUpDown);
+    playerBattleGround.addShipsToGrid(destroyer, 1, 5, goingUpDown);
+    playerBattleGround.addShipsToGrid(subMarine, 7, 2, goingAcross);
+    cout << "My BattleGround Status at the Begnning" << endl;
+    displayBoard(playerBattleGround, humanPlayer);
     cout << endl
          << endl;
+    BattleGround computerBattleGround;
+    computerBattleGround.setUpWaterGrid();
     computerBattleGround.addShipsToGrid(carrier, 0, 0, goingAcross);
+    computerBattleGround.addShipsToGrid(destroyer, 5, 1, goingUpDown);
+    computerBattleGround.addShipsToGrid(subMarine, 2, 4, goingAcross);
+    cout << "Computer BattleGround Status at the Begnning" << endl;
     displayBoard(computerBattleGround, computerPlayer);
+
+    bool gameOver = false;
+
+    while (gameOver == false)
+    {
+
+        //let player Choose Row and Column to hit
+        int playerChoiceForRow, playerChoiceForColumn;
+        cout << "Please enter row you want to target( Number Between 1 to 10): ";
+        cin >> playerChoiceForRow;
+        playerChoiceForRow = playerChoiceForRow - 1;
+        cout << "Please enter column you want to target( Number Between 1 to 10): ";
+        cin >> playerChoiceForColumn;
+        playerChoiceForColumn = playerChoiceForColumn - 1;
+
+
+        // use the player's choice to hit the computer BattleGround
+        fireAtEnemyGrid(playerChoiceForRow, playerChoiceForColumn, computerBattleGround);
+
+        //let computer randomly Choose Row and Column to hit
+        int computerChoiceForRow, computerChoiceForColumn;
+        computerChoiceForRow = RandomNumberGenerator(100) / 10 - 1;
+        computerChoiceForColumn = RandomNumberGenerator(10) - 1;
+        // use the player's choice to hit the computer BattleGround
+
+        fireAtEnemyGrid(computerChoiceForRow, computerChoiceForColumn, playerBattleGround);
+
+        cout << endl
+             << endl;
+
+        // Now display Status after the play
+        cout << "Computer Played : "
+             << "Row: " << computerChoiceForRow + 1 << "  and Column: " << computerChoiceForColumn + 1 << endl;
+        cout << "My BattleGround Status at the End of Play" << endl;
+        displayBoard(playerBattleGround, computerPlayer);
+        cout << endl;
+
+        cout << "You Played : "
+             << "Row: " << playerChoiceForRow +1 << "  and Column: " << playerChoiceForColumn + 1 << endl;
+        cout << "Computer BattleGround Status at the End of Play" << endl;
+        displayBoard(computerBattleGround, humanPlayer);
+
+        int playerChoiceToContinueGame = DisplayAndReciveMenuOptions();
+
+        if (playerChoiceToContinueGame == 2)
+        {
+            cout << "GAME OVER. YOU CHOSE TO QUIT"<<endl;;
+            gameOver = true;
+        }
+    }
+
     return 0;
 }

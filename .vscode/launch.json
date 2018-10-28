@@ -20,16 +20,28 @@
 //     ]
 // }
 
-{
+
     "version": "0.2.0",
     "configurations":
     [
       
+      {
+        "name": "Mac",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/battle",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "lldb"
+      },
       { 
         "name": "(lldb) Attach",
         "type": "cppdbg",
         "request": "attach",
-        "program": "/Users/leadconsultant/Documents/PERSONAL/Praful/CPLUSPLUS/battle.exe",
+        "program": "${workspaceFolder}/battle",
         "processId": "${command:pickProcess}",
         "MIMode": "lldb"
       },
@@ -37,8 +49,8 @@
         "name": "Debug Tests C/C++",
         "type": "cppdbg",
         "request": "launch",
-        "program": "battle",
-        "cwd": "${workspaceFolder}/Users/leadconsultant/Documents/PERSONAL/Praful/CPLUSPLUS",
+        "program": "${workspaceFolder}/battle",
+        "cwd": "${workspaceFolder}",
         "args": [],
         "preLaunchTask": "build"
       }
