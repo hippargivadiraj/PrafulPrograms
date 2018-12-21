@@ -6,13 +6,14 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-o", "battle", "Battle.cpp"
+                "-o",
+                "RoboGenes",
+                "RoboGenes.cpp"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
         }
-      
     ]
 }

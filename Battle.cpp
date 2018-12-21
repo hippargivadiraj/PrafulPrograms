@@ -301,9 +301,9 @@ int main()
         //check if someone got hit
 
         bool playerGotHit = playerBattleGround.gotHit();
-        cout << playerGotHit;
+        
         bool computerGotHit = computerBattleGround.gotHit();
-        cout << computerGotHit;
+        
         if (playerGotHit == true && computerGotHit == true)
         {
             cout << "GAME OVER. You and Computer both got hit. You are Even" << endl;

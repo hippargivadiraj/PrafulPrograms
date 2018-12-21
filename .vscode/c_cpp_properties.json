@@ -1,4 +1,4 @@
-    {
+{
     "configurations": [
         {
             "name": "Mac",
@@ -73,5 +73,5 @@
             }
         }
     ],
-    "version": 3
+    "version": 4
 }
